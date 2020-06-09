@@ -14,3 +14,4 @@ if (!defined('WPINC')) {
 
 require_once __DIR__ . "/config/config.php";
 require_once __DIR__ . "/inc/oxygen-starter.class.php";
+require_once __DIR__ . "/inc/oxygen-helpers.class.php";

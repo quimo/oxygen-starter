@@ -1,0 +1,14 @@
+section img {
+    width: 100%;
+    height: auto;
+}
+
+figure {
+    margin: 0 !important;
+}
+
+figcaption {
+    font-size: 10px;
+    text-align: right;
+    font-style: italic;
+}
