@@ -15,8 +15,11 @@ class OxygenHelpers {
 
     public function __construct() {
         
-        //account analytics
+        //analytics
         add_action('wp_head', array('OxygenHelpers', 'addAnalyticsCode'), 1);
+
+        //facebook pixel
+        add_action('wp_head', array('OxygenHelpers', 'addFacebookPixelCode'));
 
         //tempo di lettura
         add_shortcode('oxs_article_reading_time', array('OxygenHelpers', 'getArticleReadingTime'));
@@ -43,6 +46,39 @@ class OxygenHelpers {
             gtag('js', new Date());
             gtag('config', '<?php echo OXYGEN_STARTER_UA ?>', { 'anonymize_ip': true });
             </script>
+            <?php
+        }
+    }
+
+    function addFacebookPixelCode() {
+        if (!is_user_logged_in()) {
+            ?>
+             <!-- Facebook Pixel Code -->
+            <script>
+            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '<?php echo OXYGEN_STARTER_FB_PIXEL ?>');
+            fbq('track', 'PageView');
+            </script>
+            <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=<?php echo OXYGEN_STARTER_FB_PIXEL ?>&ev=PageView&noscript=1"
+            /></noscript>
+            <script>
+            // tracciamento di un evento custom
+            /*
+            jQuery(document).ready(function($) {
+                if ($('#ELEMENT_ID').length) {
+                    $('#ELEMENT_ID').on('click', function() {
+                        fbq('trackCustom', 'EVENT NAME');
+                    });
+                }
+            });
+            */
+            </script>
+            <!-- End Facebook Pixel Code -->
             <?php
         }
     }
